@@ -19,7 +19,6 @@ import axios from 'axios'
 
 function Login(){
 
-
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -36,7 +35,14 @@ function Login(){
                 alert('Wrong Credentials')
             }
         })
-        .catch((err) => alert('Error in Login'))
+        .catch((err) => {
+    if (err.response) {
+        alert(err.response.data)
+    } else {
+        //server not running
+        alert('Error in Login')
+    }
+})
 }
 
 return (

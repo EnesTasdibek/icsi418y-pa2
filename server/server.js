@@ -80,11 +80,15 @@ app.get('/getUser', async (req, res) => {
     console.log(username)
     console.log(password)
     try {//The supplied password is compared with the stored password
+        //Check required fields
+        if (!username || !password) {
+            return res.status(400).send("Username and password are required")
+        }
         const user = await User.findOne({ username, password })
         res.send(user)
     }
     catch (error) {
-        res.status(500).send(error)
+        res.status(500).send("Username and password are required")
     }
 })
 
